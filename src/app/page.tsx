@@ -7,9 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Share2 } from "lucide-react"
 
 const mockQuestions = [
-  { question: "What is the capital of France?", answer: "Paris" },
-  { question: "Who painted the Mona Lisa?", answer: "Leonardo da Vinci" },
-  { question: "What is the largest planet in our solar system?", answer: "Jupiter" },
+  { question: "Which U.S. state is nicknamed the Sunshine State?", answer: "Florida" },
+  { question: "What is the only metal that is liquid at room temperature?", answer: "Mercury" },
+  { question: "What was the first animated film to be nominated for the Academy Award for Best Picture?", answer: "Beauty and the Beast" },
 ]
 
 const initialGameState = {
