@@ -100,7 +100,7 @@ export default function TrivialeGame() {
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">Triviale</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           {!gameState.gameOver ? (
             <div className="space-y-4">
               <h3 className="font-semibold mb-2">{mockQuestions[gameState.currentQuestion].question}</h3>
