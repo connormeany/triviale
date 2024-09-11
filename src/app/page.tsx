@@ -77,7 +77,8 @@ export default function TrivialeGame() {
 
   const shareResults = () => {
     const results = gameState.isCorrect.reduce((acc, curr) => acc + (curr ? "🟩" : "🟥"), "")
-    const shareText = `I just played Triviale! Here's how I did:\n${results}\nCan you beat my score?`
+    const correctAnswers = gameState.isCorrect.filter(Boolean).length;
+    const shareText = `Triviale 1 ${correctAnswers}/3:\n${results}`
     if (navigator.share) {
       navigator.share({
         title: 'My Triviale Results',
