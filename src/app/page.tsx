@@ -5,12 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Share2 } from "lucide-react"
-
-const mockQuestions = [
-  { question: "Which U.S. state is nicknamed the Sunshine State?", answer: "Florida" },
-  { question: "What is the only metal that is liquid at room temperature?", answer: "Mercury" },
-  { question: "What was the first animated film to be nominated for the Academy Award for Best Picture?", answer: "Beauty and the Beast" },
-]
+import questions, { Question } from "@/lib/questions" // Import Question interface
 
 const initialGameState = {
   currentQuestion: 0,
@@ -24,12 +19,25 @@ export default function TrivialeGame() {
   const [gameState, setGameState] = useState(initialGameState)
   const [currentGuess, setCurrentGuess] = useState("")
   const [isLoading, setIsLoading] = useState(true)
+  const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]) // Use Question interface
 
+  // Get today's date in EST
+  const today = new Date().toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  
+
+  // Filter questions based on today's date
   useEffect(() => {
     const savedState = localStorage.getItem('trivialeGameState')
     if (savedState) {
       setGameState(JSON.parse(savedState))
     }
+    const filtQuestions = questions.filter(q => new Date(q.date).toISOString().split('T')[0] === today);
+    setFilteredQuestions(filtQuestions)
     setIsLoading(false)
   }, [])
 
@@ -42,7 +50,7 @@ export default function TrivialeGame() {
   const handleSubmitGuess = () => {
     if (gameState.showAnswer) return
 
-    const isCorrect = currentGuess.toLowerCase() === mockQuestions[gameState.currentQuestion].answer.toLowerCase()
+    const isCorrect = currentGuess.toLowerCase() === filteredQuestions[gameState.currentQuestion].answer.toLowerCase()
     const newAnswers = [...gameState.answers]
     newAnswers[gameState.currentQuestion] = currentGuess
     const newIsCorrect = [...gameState.isCorrect]
@@ -63,7 +71,7 @@ export default function TrivialeGame() {
   }
 
   const handleNextQuestion = () => {
-    if (gameState.currentQuestion === 2) {
+    if (gameState.currentQuestion === filteredQuestions.length - 1) {
       setGameState({ ...gameState, gameOver: true })
     } else {
       setGameState({
@@ -78,7 +86,15 @@ export default function TrivialeGame() {
   const shareResults = () => {
     const results = gameState.isCorrect.reduce((acc, curr) => acc + (curr ? "🟩" : "🟥"), "")
     const correctAnswers = gameState.isCorrect.filter(Boolean).length;
-    const shareText = `Triviale 1 ${correctAnswers}/3:\n${results}`
+    const shareText = `Triviale 1 ${correctAnswers}/${filteredQuestions.length}:\n${results}`
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(shareText).then(() => {
+      console.log('Results copied to clipboard');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+
     if (navigator.share) {
       navigator.share({
         title: 'My Triviale Results',
@@ -103,7 +119,7 @@ export default function TrivialeGame() {
         <CardContent className="space-y-4">
           {!gameState.gameOver ? (
             <div className="space-y-4">
-              <h3 className="font-semibold mb-2">{mockQuestions[gameState.currentQuestion].question}</h3>
+              <h3 className="font-semibold mb-2">{filteredQuestions[gameState.currentQuestion].question}</h3>
               <div className="flex items-center space-x-2">
                 <Input
                   type="text"
@@ -122,9 +138,9 @@ export default function TrivialeGame() {
                   <p className={gameState.isCorrect[gameState.currentQuestion] ? "text-green-600" : "text-red-600"}>
                     {gameState.isCorrect[gameState.currentQuestion] ? "Correct!" : "Incorrect."}
                   </p>
-                  <p>The correct answer is: {mockQuestions[gameState.currentQuestion].answer}</p>
+                  <p>The correct answer is: {filteredQuestions[gameState.currentQuestion].answer}</p>
                   <Button className="mt-2" onClick={handleNextQuestion}>
-                    {gameState.currentQuestion === 2 ? "See Results" : "Next Question"}
+                    {gameState.currentQuestion === filteredQuestions.length - 1 ? "See Results" : "Next Question"}
                   </Button>
                 </div>
               )}
@@ -132,7 +148,7 @@ export default function TrivialeGame() {
           ) : (
             <div className="space-y-4">
               <h3 className="font-semibold mb-2">Your Results:</h3>
-              {mockQuestions.map((q, index) => (
+              {filteredQuestions.map((q, index) => (
                 <div key={index} className="border p-4 rounded-md">
                   <p className="font-medium">{q.question}</p>
                   <p className={gameState.isCorrect[index] ? "text-green-600" : "text-red-600"}>
