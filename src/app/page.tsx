@@ -269,7 +269,7 @@ export default function TrivialeGame() {
                 </div>
               </div>
             </div>
-            <h3 className="font-semibold mb-2">Today's Results:</h3>
+            <h3 className="font-semibold mb-2">Today&apos;s Results:</h3>
             {filteredQuestions.map((q, index) => (
               <div key={index} className="border p-4 rounded-md">
                 <p className="font-medium">{q.question}</p>
