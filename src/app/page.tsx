@@ -57,7 +57,7 @@ export default function TrivialeGame() {
     const filtQuestions = questions.filter(q => new Date(q.date).toISOString().split('T')[0] === today);
     setFilteredQuestions(filtQuestions)
     setIsLoading(false)
-  }, [])
+  }, [today])
 
   useEffect(() => {
     if (!isLoading) {
@@ -225,7 +225,7 @@ export default function TrivialeGame() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold">
-                  Easy Questions: {gameResults.easyCorrect}/{gameResults.easyTotal} (
+                  Easy: {gameResults.easyCorrect}/{gameResults.easyTotal} (
                   {Math.round(easyPercent)}%)
                 </h4>
                 <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
@@ -240,7 +240,7 @@ export default function TrivialeGame() {
               </div>
               <div>
                 <h4 className="font-semibold">
-                  Medium Questions: {gameResults.mediumCorrect}/{gameResults.mediumTotal} (
+                  Medium: {gameResults.mediumCorrect}/{gameResults.mediumTotal} (
                   {Math.round(mediumPercent)}%)
                 </h4>
                 <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
@@ -255,7 +255,7 @@ export default function TrivialeGame() {
               </div>
               <div>
                 <h4 className="font-semibold">
-                  Hard Questions: {gameResults.hardCorrect}/{gameResults.hardTotal} (
+                  Hard: {gameResults.hardCorrect}/{gameResults.hardTotal} (
                   {Math.round(hardPercent)}%)
                 </h4>
                 <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
