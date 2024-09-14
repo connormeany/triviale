@@ -13,10 +13,21 @@ const initialGameState = {
   isCorrect: [false, false, false],
   showAnswer: false,
   gameOver: false,
+  date: new Date().toISOString().split('T')[0],
+}
+
+const initialGameResults = {
+  easyCorrect: 0,
+  easyTotal: 0,
+  mediumCorrect: 0,
+  mediumTotal: 0,
+  hardCorrect: 0,
+  hardTotal: 0,
 }
 
 export default function TrivialeGame() {
   const [gameState, setGameState] = useState(initialGameState)
+  const [gameResults, setGameResults] = useState(initialGameResults)
   const [currentGuess, setCurrentGuess] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]) // Use Question interface
@@ -30,11 +41,16 @@ export default function TrivialeGame() {
   });
   
 
-  // Filter questions based on today's date
   useEffect(() => {
-    const savedState = localStorage.getItem('trivialeGameState')
-    if (savedState) {
-      setGameState(JSON.parse(savedState))
+    const savedState = JSON.parse(localStorage.getItem('trivialeGameState') || '{}')
+    const savedResults = localStorage.getItem('trivialeGameResults')
+    const currentDate = new Date().toISOString().split('T')[0];
+    console.log(savedResults)
+    if (savedState && savedState.date === currentDate) {
+      setGameState(savedState)
+    }
+    if (savedResults) {
+      setGameResults(JSON.parse(savedResults))
     }
     const filtQuestions = questions.filter(q => new Date(q.date).toISOString().split('T')[0] === today);
     setFilteredQuestions(filtQuestions)
@@ -47,6 +63,12 @@ export default function TrivialeGame() {
     }
   }, [gameState, isLoading])
 
+  useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem('trivialeGameResults', JSON.stringify(gameResults))
+    }
+  }, [gameResults, isLoading])
+
   const handleSubmitGuess = () => {
     if (gameState.showAnswer) return
 
@@ -56,12 +78,23 @@ export default function TrivialeGame() {
     const newIsCorrect = [...gameState.isCorrect]
     newIsCorrect[gameState.currentQuestion] = isCorrect
 
+    setGameResults({
+      easyCorrect: gameResults.easyCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 0 && isCorrect ? 1 : 0),
+      easyTotal: gameResults.easyTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 0 ? 1 : 0),
+      mediumCorrect: gameResults.mediumCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 1 && isCorrect ? 1 : 0),
+      mediumTotal: gameResults.mediumTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 1 ? 1 : 0),
+      hardCorrect: gameResults.hardCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 2 && isCorrect ? 1 : 0),
+      hardTotal: gameResults.hardTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 2 ? 1 : 0),
+    })
+
     setGameState({
       ...gameState,
       answers: newAnswers,
       isCorrect: newIsCorrect,
       showAnswer: true,
     })
+
+
   }
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -86,7 +119,8 @@ export default function TrivialeGame() {
   const shareResults = () => {
     const results = gameState.isCorrect.reduce((acc, curr) => acc + (curr ? "🟩" : "🟥"), "")
     const correctAnswers = gameState.isCorrect.filter(Boolean).length;
-    const shareText = `Triviale 1 ${correctAnswers}/${filteredQuestions.length}:\n${results}`
+    const daysSince = Math.floor((new Date().getTime() - new Date("2024-09-12").getTime()) / (1000 * 60 * 60 * 24));
+    const shareText = `Triviale ${daysSince} ${correctAnswers}/${filteredQuestions.length}:\n${results}`
     
     // Copy to clipboard
     navigator.clipboard.writeText(shareText).then(() => {
