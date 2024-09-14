@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Share2 } from "lucide-react"
-import questions, { Question } from "@/lib/questions" // Import Question interface
+import questions, { Question } from "@/lib/questions"
 
 const initialGameState = {
   currentQuestion: 0,
@@ -30,9 +30,12 @@ export default function TrivialeGame() {
   const [gameResults, setGameResults] = useState(initialGameResults)
   const [currentGuess, setCurrentGuess] = useState("")
   const [isLoading, setIsLoading] = useState(true)
-  const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]) // Use Question interface
+  const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([])
 
-  // Get today's date in EST
+  const [easyPercent, setEasyPercent] = useState(0)
+  const [mediumPercent, setMediumPercent] = useState(0)
+  const [hardPercent, setHardPercent] = useState(0)
+
   const today = new Date().toLocaleDateString("en-CA", {
     timeZone: "America/New_York",
     year: "numeric",
@@ -45,7 +48,6 @@ export default function TrivialeGame() {
     const savedState = JSON.parse(localStorage.getItem('trivialeGameState') || '{}')
     const savedResults = localStorage.getItem('trivialeGameResults')
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log(savedResults)
     if (savedState && savedState.date === currentDate) {
       setGameState(savedState)
     }
@@ -69,22 +71,64 @@ export default function TrivialeGame() {
     }
   }, [gameResults, isLoading])
 
+  useEffect(() => {
+    if (gameState.gameOver) {
+      const easyFinalPercent =
+        gameResults.easyTotal > 0
+          ? (gameResults.easyCorrect / gameResults.easyTotal) * 100
+          : 0
+      const mediumFinalPercent =
+        gameResults.mediumTotal > 0
+          ? (gameResults.mediumCorrect / gameResults.mediumTotal) * 100
+          : 0
+      const hardFinalPercent =
+        gameResults.hardTotal > 0
+          ? (gameResults.hardCorrect / gameResults.hardTotal) * 100
+          : 0
+
+      animatePercentage(easyFinalPercent, setEasyPercent)
+      animatePercentage(mediumFinalPercent, setMediumPercent)
+      animatePercentage(hardFinalPercent, setHardPercent)
+    }
+  }, [gameState.gameOver])
+
+  const animatePercentage = (endValue: number, setter: (value: number) => void) => {
+    let startValue = 0
+    const duration = 1000
+    const stepTime = 10
+    const totalSteps = Math.ceil(duration / stepTime)
+    const increment = endValue / totalSteps
+
+    const animate = () => {
+      startValue += increment
+      if (startValue >= endValue) {
+        setter(endValue)
+      } else {
+        setter(startValue)
+        setTimeout(animate, stepTime)
+      }
+    }
+    animate()
+  }
+
+
   const handleSubmitGuess = () => {
     if (gameState.showAnswer) return
 
-    const isCorrect = currentGuess.toLowerCase() === filteredQuestions[gameState.currentQuestion].answer.toLowerCase()
+    const currentQuestion = filteredQuestions[gameState.currentQuestion]
+    const isCorrect = currentQuestion.answers.some(answer => answer.toLowerCase() === currentGuess.toLowerCase())
     const newAnswers = [...gameState.answers]
     newAnswers[gameState.currentQuestion] = currentGuess
     const newIsCorrect = [...gameState.isCorrect]
     newIsCorrect[gameState.currentQuestion] = isCorrect
 
     setGameResults({
-      easyCorrect: gameResults.easyCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 0 && isCorrect ? 1 : 0),
-      easyTotal: gameResults.easyTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 0 ? 1 : 0),
-      mediumCorrect: gameResults.mediumCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 1 && isCorrect ? 1 : 0),
-      mediumTotal: gameResults.mediumTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 1 ? 1 : 0),
-      hardCorrect: gameResults.hardCorrect + (filteredQuestions[gameState.currentQuestion].difficulty === 2 && isCorrect ? 1 : 0),
-      hardTotal: gameResults.hardTotal + (filteredQuestions[gameState.currentQuestion].difficulty === 2 ? 1 : 0),
+      easyCorrect: gameResults.easyCorrect + (currentQuestion.difficulty === 0 && isCorrect ? 1 : 0),
+      easyTotal: gameResults.easyTotal + (currentQuestion.difficulty === 0 ? 1 : 0),
+      mediumCorrect: gameResults.mediumCorrect + (currentQuestion.difficulty === 1 && isCorrect ? 1 : 0),
+      mediumTotal: gameResults.mediumTotal + (currentQuestion.difficulty === 1 ? 1 : 0),
+      hardCorrect: gameResults.hardCorrect + (currentQuestion.difficulty === 2 && isCorrect ? 1 : 0),
+      hardTotal: gameResults.hardTotal + (currentQuestion.difficulty === 2 ? 1 : 0),
     })
 
     setGameState({
@@ -93,8 +137,6 @@ export default function TrivialeGame() {
       isCorrect: newIsCorrect,
       showAnswer: true,
     })
-
-
   }
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -122,7 +164,6 @@ export default function TrivialeGame() {
     const daysSince = Math.floor((new Date().getTime() - new Date("2024-09-12").getTime()) / (1000 * 60 * 60 * 24));
     const shareText = `Triviale ${daysSince} ${correctAnswers}/${filteredQuestions.length}:\n${results}`
     
-    // Copy to clipboard
     navigator.clipboard.writeText(shareText).then(() => {
       console.log('Results copied to clipboard');
     }).catch(err => {
@@ -172,7 +213,7 @@ export default function TrivialeGame() {
                   <p className={gameState.isCorrect[gameState.currentQuestion] ? "text-green-600" : "text-red-600"}>
                     {gameState.isCorrect[gameState.currentQuestion] ? "Correct!" : "Incorrect."}
                   </p>
-                  <p>The correct answer is: {filteredQuestions[gameState.currentQuestion].answer}</p>
+                  <p>The correct answer is: {filteredQuestions[gameState.currentQuestion].answers[0]}</p>
                   <Button className="mt-2" onClick={handleNextQuestion}>
                     {gameState.currentQuestion === filteredQuestions.length - 1 ? "See Results" : "Next Question"}
                   </Button>
@@ -181,16 +222,64 @@ export default function TrivialeGame() {
             </div>
           ) : (
             <div className="space-y-4">
-              <h3 className="font-semibold mb-2">Your Results:</h3>
-              {filteredQuestions.map((q, index) => (
-                <div key={index} className="border p-4 rounded-md">
-                  <p className="font-medium">{q.question}</p>
-                  <p className={gameState.isCorrect[index] ? "text-green-600" : "text-red-600"}>
-                    Your answer: {gameState.answers[index]}
-                  </p>
-                  <p>Correct answer: {q.answer}</p>
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold">
+                  Easy Questions: {gameResults.easyCorrect}/{gameResults.easyTotal} (
+                  {Math.round(easyPercent)}%)
+                </h4>
+                <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
+                  <div
+                    className="bg-green-500 h-full"
+                    style={{
+                      width: `${easyPercent}%`,
+                      transition: "width 1s linear",
+                    }}
+                  ></div>
                 </div>
-              ))}
+              </div>
+              <div>
+                <h4 className="font-semibold">
+                  Medium Questions: {gameResults.mediumCorrect}/{gameResults.mediumTotal} (
+                  {Math.round(mediumPercent)}%)
+                </h4>
+                <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
+                  <div
+                    className="bg-yellow-500 h-full"
+                    style={{
+                      width: `${mediumPercent}%`,
+                      transition: "width 1s linear",
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold">
+                  Hard Questions: {gameResults.hardCorrect}/{gameResults.hardTotal} (
+                  {Math.round(hardPercent)}%)
+                </h4>
+                <div className="w-full bg-gray-300 rounded-full h-4 overflow-hidden">
+                  <div
+                    className="bg-red-500 h-full"
+                    style={{
+                      width: `${hardPercent}%`,
+                      transition: "width 1s linear",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <h3 className="font-semibold mb-2">Today's Results:</h3>
+            {filteredQuestions.map((q, index) => (
+              <div key={index} className="border p-4 rounded-md">
+                <p className="font-medium">{q.question}</p>
+                <p className={gameState.isCorrect[index] ? "text-green-600" : "text-red-600"}>
+                  Your answer: {gameState.answers[index]}
+                </p>
+                <p>Correct answer: {q.answers[0]}</p>
+              </div>
+            ))}
+            
               <Button className="w-full" onClick={shareResults}>
                 <Share2 className="mr-2 h-4 w-4" /> Share Results
               </Button>
