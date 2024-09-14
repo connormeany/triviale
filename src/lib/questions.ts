@@ -25,7 +25,7 @@ const questions: Question[] = [
         answers: ["16"],
     },
     {
-        question: "Who wrote 'Romeo and Juliet'?",
+        question: "Who wrote Romeo and Juliet?",
         difficulty: 0,
         date: "2024-09-14",
         answers: ["William Shakespeare", "Shakespeare"],
