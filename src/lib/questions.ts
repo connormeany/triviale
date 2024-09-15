@@ -60,6 +60,24 @@ const questions: Question[] = [
         date: "2024-09-15",
         answers: ["Litmus"],
     },
+    {
+        question: "What material and artistic medium, whose name refers to fired but unglazed clay, was a favorite for architectural ornamentation during the Etruscan era and much later, during the Art Deco era? It was used in one of the most stunning archaeological finds in history, which occurred in 1974.",
+        difficulty: 0,
+        date: "2024-09-16",
+        answers: ["Terra Cotta"],
+    },
+    {
+        question: "The Tigers, Lions, Giants, Hawks, Buffaloes, Fighters, Dragons, Swallows, and Carp are names of professional clubs in a league playing what sport?",
+        difficulty: 1,
+        date: "2024-09-16",
+        answers: ["Baseball"],
+    },
+    {
+        question: "When it was admitted to the union in 1907, what US state's capital city was Guthrie, before relocating 32 miles south to its present location in 1910?",
+        difficulty: 2,
+        date: "2024-09-16",
+        answers: ["Oklahoma"],
+    },
 ];
 
 export default questions;
