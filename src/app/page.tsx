@@ -269,7 +269,7 @@ export default function TrivialeGame() {
               </div>
             </div>
             <Button className="w-full font-bold" onClick={shareResults}>
-                <Share2 className="mr-2 h-4 w-4" /> Share Results
+                <Share2 className="mr-2 h-4 w-4" /> Share Today&apos;s Results
             </Button>
             <h3 className="font-semibold mb-2">Today&apos;s Results:</h3>
             {filteredQuestions.map((q, index) => (
