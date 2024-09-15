@@ -97,3 +97,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/700.css";
+
+body {
+  font-family: 'Inter', sans-serif;
+}
