@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import "@fontsource/inter/400.css"; // Regular weight
 import "@fontsource/inter/700.css"; // Bold weight
