@@ -43,22 +43,22 @@ const questions: Question[] = [
         answers: ["Canberra"],
     },
     {
-        question: "What is the smallest prime number?",
+        question: "Name any one of the three most abundant elements in the earth's crust (making up roughly 47%, 28%, and 8% by weight, respectively).",
         difficulty: 0,
         date: "2024-09-15",
-        answers: ["2"],
+        answers: ["Oxygen, Silicon, and Aluminum", "Oxygen", "Silicon", "Aluminum"],
     },
     {
-        question: "What year did the Titanic sink?",
+        question: "In December of 2010, an arrest warrant was issued against WikiLeaks founder Julian Assange to extradite him to what country, for questioning on charges related to alleged sex offenses?",
         difficulty: 1,
         date: "2024-09-15",
-        answers: ["1912"],
+        answers: ["Sweden"],
     },
     {
-        question: "What is the longest river in the world?",
+        question: "The lost and hidden (and fictional) Incan city of Parapata is central to the plot of a 2019 film that features the first live-action film appearance of what title character?",
         difficulty: 2,
         date: "2024-09-15",
-        answers: ["Nile", "The Nile"],
+        answers: ["Dora", "Dora the Explorer"],
     },
 ];
 
