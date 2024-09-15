@@ -54,7 +54,9 @@ export default function TrivialeGame() {
     if (savedResults) {
       setGameResults(JSON.parse(savedResults))
     }
-    const filtQuestions = questions.filter(q => new Date(q.date).toISOString().split('T')[0] === today);
+    const filtQuestions = questions
+      .filter(q => new Date(q.date).toISOString().split('T')[0] === today)
+      .sort((a, b) => a.difficulty - b.difficulty);
     setFilteredQuestions(filtQuestions)
     setIsLoading(false)
   }, [today])

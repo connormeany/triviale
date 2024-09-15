@@ -25,24 +25,6 @@ const questions: Question[] = [
         answers: ["16"],
     },
     {
-        question: "Who wrote Romeo and Juliet?",
-        difficulty: 0,
-        date: "2024-09-15",
-        answers: ["William Shakespeare", "Shakespeare"],
-    },
-    {
-        question: "What is the chemical symbol for gold?",
-        difficulty: 1,
-        date: "2024-09-15",
-        answers: ["Au"],
-    },
-    {
-        question: "What is the capital of Australia?",
-        difficulty: 2,
-        date: "2024-09-15",
-        answers: ["Canberra"],
-    },
-    {
         question: "Name any one of the three most abundant elements in the earth's crust (making up roughly 47%, 28%, and 8% by weight, respectively).",
         difficulty: 0,
         date: "2024-09-14",
@@ -58,7 +40,25 @@ const questions: Question[] = [
         question: "The lost and hidden (and fictional) Incan city of Parapata is central to the plot of a 2019 film that features the first live-action film appearance of what title character?",
         difficulty: 2,
         date: "2024-09-14",
-        answers: ["Dora", "Dora the Explorer"],
+        answers: ["Dora the Explorer", "Dora"],
+    },
+    {
+        question: "The cities of New York, Venice, Berlin, Las Vegas, and Bilbao are current or previous homes to art museums established by what foundation (after which the museums are all named)? ",
+        difficulty: 0,
+        date: "2024-09-15",
+        answers: ["Guggenheim", "The Guggenheim"],
+    },
+    {
+        question: "The HBO drama series The Idol was co-created by and stars Abel Tesfaye, who is better known by what stage name? ",
+        difficulty: 1,
+        date: "2024-09-15",
+        answers: ["The Weeknd", "Weeknd", "The Weekend", "Weekend"],
+    },
+    {
+        question: "What word, derived in part from a term in Old Norse for color, is used for a water-soluble mixture of various naturally occurring organic dyes extracted from lichens that is used to test materials for acidity?",
+        difficulty: 2,
+        date: "2024-09-15",
+        answers: ["Litmus"],
     },
 ];
 
