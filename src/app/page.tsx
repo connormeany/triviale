@@ -41,7 +41,9 @@ export default function TrivialeGame() {
   const [mediumPercent, setMediumPercent] = useState(0)
   const [hardPercent, setHardPercent] = useState(0)
 
-  const today = new Date().toLocaleDateString("en-CA", {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const today = tomorrow.toLocaleDateString("en-CA", {
     timeZone: "America/New_York",
     year: "numeric",
     month: "2-digit",
@@ -52,6 +54,9 @@ export default function TrivialeGame() {
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem('trivialeGameState') || '{}')
     const savedResults = localStorage.getItem('trivialeGameResults')
+
+    console.log(savedState)
+    console.log(today)
 
     if (savedState && savedState.date === today) {
       setGameState(savedState)
