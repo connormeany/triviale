@@ -13,12 +13,16 @@ const initialGameState = {
   isCorrect: [false, false, false],
   showAnswer: false,
   gameOver: false,
-  date: new Date().toLocaleDateString("en-CA", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }),
+  date: (() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toLocaleDateString("en-CA", {
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  })(),
 }
 
 const initialGameResults = {
@@ -43,6 +47,13 @@ export default function TrivialeGame() {
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDate = tomorrow.toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
   const today = tomorrow.toLocaleDateString("en-CA", {
     timeZone: "America/New_York",
     year: "numeric",
@@ -55,10 +66,7 @@ export default function TrivialeGame() {
     const savedState = JSON.parse(localStorage.getItem('trivialeGameState') || '{}')
     const savedResults = localStorage.getItem('trivialeGameResults')
 
-    console.log(savedState)
-    console.log(today)
-
-    if (savedState && savedState.date === today) {
+    if (savedState && savedState.date === tomorrowDate) {
       setGameState(savedState)
     }
     if (savedResults) {
