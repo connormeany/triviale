@@ -62,13 +62,13 @@ const questions: Question[] = [
     },
     {
         question: "What material and artistic medium, whose name refers to fired but unglazed clay, was a favorite for architectural ornamentation during the Etruscan era and much later, during the Art Deco era? It was used in one of the most stunning archaeological finds in history, which occurred in 1974.",
-        difficulty: 0,
+        difficulty: 1,
         date: "2024-09-16",
-        answers: ["Terra Cotta"],
+        answers: ["Terra Cotta", "Terra-cotta", "Terra Cota", "Tera Cotta", "Tera Cota"],
     },
     {
         question: "The Tigers, Lions, Giants, Hawks, Buffaloes, Fighters, Dragons, Swallows, and Carp are names of professional clubs in a league playing what sport?",
-        difficulty: 1,
+        difficulty: 0,
         date: "2024-09-16",
         answers: ["Baseball"],
     },

@@ -6,6 +6,13 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Share2 } from "lucide-react"
 import questions, { Question } from "@/lib/questions"
+import { Badge } from "@/components/ui/badge"
+
+const difficultyColors: { [key: number]: string } = {
+  0: "bg-green-500",
+  1: "bg-yellow-500",
+  2: "bg-red-500",
+}
 
 const initialGameState = {
   currentQuestion: 0,
@@ -214,6 +221,14 @@ export default function TrivialeGame() {
         <CardContent className="space-y-4">
           {!gameState.gameOver ? (
             <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-bold text-gray-500">
+                  Question {gameState.currentQuestion + 1}/{filteredQuestions.length}
+                </span>
+                <Badge className={`${difficultyColors[filteredQuestions[gameState.currentQuestion].difficulty]} text-white rounded-full`}>
+                  {filteredQuestions[gameState.currentQuestion].difficulty === 0 ? "Easy" : filteredQuestions[gameState.currentQuestion].difficulty === 1 ? "Medium" : "Hard"}
+                </Badge>
+              </div>
               <h3 className="font-semibold mb-2">{filteredQuestions[gameState.currentQuestion].question}</h3>
               <div className="flex items-center space-x-2">
                 <Input
