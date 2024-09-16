@@ -4,7 +4,7 @@ export default function AnimatedLogo() {
   return (
     <div className="flex items-center justify-center h-20 w-full">
       <motion.div
-        className="text-4xl font-bold text-primary"
+        className="text-3xl font-bold text-primary"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
