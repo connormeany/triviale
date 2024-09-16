@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Share2 } from "lucide-react"
 import questions, { Question } from "@/lib/questions"
 import { Badge } from "@/components/ui/badge"
+import AnimatedLogo from "./logo"
 
 const difficultyColors: { [key: number]: string } = {
   0: "bg-green-500",
@@ -216,7 +217,7 @@ export default function TrivialeGame() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Triviale</CardTitle>
+        <AnimatedLogo />
         </CardHeader>
         <CardContent className="space-y-4">
           {!gameState.gameOver ? (
