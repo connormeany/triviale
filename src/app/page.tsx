@@ -13,7 +13,12 @@ const initialGameState = {
   isCorrect: [false, false, false],
   showAnswer: false,
   gameOver: false,
-  date: new Date().toISOString().split('T')[0],
+  date: new Date().toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }),
 }
 
 const initialGameResults = {
@@ -47,8 +52,8 @@ export default function TrivialeGame() {
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem('trivialeGameState') || '{}')
     const savedResults = localStorage.getItem('trivialeGameResults')
-    const currentDate = new Date().toISOString().split('T')[0];
-    if (savedState && savedState.date === currentDate) {
+
+    if (savedState && savedState.date === today) {
       setGameState(savedState)
     }
     if (savedResults) {

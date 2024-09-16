@@ -78,6 +78,24 @@ const questions: Question[] = [
         date: "2024-09-16",
         answers: ["Oklahoma"],
     },
+    {
+        question: "The first solid body electric guitar manufactured and sold by the Gibson Guitar Corporation, in 1952, was named after (and endorsed by) what American guitarist and inventor?",
+        difficulty: 0,
+        date: "2024-09-17",
+        answers: ["Les Paul"],
+    },
+    {
+        question: "While most mozzarella cheese produced globally is made from cow's milk, a higher end variety, originating in Italy (where it is given special protected geographic status) is made from the milk of what animal?",
+        difficulty: 1,
+        date: "2024-09-17",
+        answers: ["Water Buffalo", "Buffalo"],
+    },
+    {
+        question: "'Jumpman' was an early name for the video game character now known as Mario, and is also unrelatedly the name of a logo owned by what company?",
+        difficulty: 2,
+        date: "2024-09-17",
+        answers: ["Nike"],
+    },
 ];
 
 export default questions;
