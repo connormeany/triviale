@@ -54,7 +54,7 @@ export default function TrivialeGame() {
     day: "2-digit",
   });
 
-  const today = tomorrow.toLocaleDateString("en-CA", {
+  const today = new Date().toLocaleDateString("en-CA", {
     timeZone: "America/New_York",
     year: "numeric",
     month: "2-digit",
@@ -72,6 +72,7 @@ export default function TrivialeGame() {
     if (savedResults) {
       setGameResults(JSON.parse(savedResults))
     }
+
     const filtQuestions = questions
       .filter(q => new Date(q.date).toISOString().split('T')[0] === today)
       .sort((a, b) => a.difficulty - b.difficulty);
