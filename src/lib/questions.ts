@@ -96,6 +96,42 @@ const questions: Question[] = [
         date: "2024-09-17",
         answers: ["Nike"],
     },
+    {
+        question: "The psychological condition in which a hostage and their captor develop an unnatural and close relationship was first described in a group held hostage in a bank in 1973, who remained supportive of the thieves during and after their captivity. In what city did this episode take place?",
+        difficulty: 0,
+        date: "2024-09-18",
+        answers: ["Stockholm"],
+    },
+    {
+        question: "Virtually the entirety of the southern shore of the Black Sea is the northern coastline of what country?",
+        difficulty: 1,
+        date: "2024-09-18",
+        answers: ["Turkey"],
+    },
+    {
+        question: "The expression 'too big to fail', associated with the theory that some institutions are so large and interconnected with the economy that their failure would have outsized impacts on the economic system, was coined in the 1980s, but during the 2008 financial crisis, it was commonly used to describe several entities—and especially the actual collapse and bankruptcy of what financial-services firm, which was founded in 1850 and was (prior to its failure) the fourth-largest investment bank in the United States?",
+        difficulty: 2,
+        date: "2024-09-18",
+        answers: ["Lehman Brothers", "Lehman", "The Lehman Brothers", "Lehman Brother"],
+    },
+    {
+        question: "The first solid body electric guitar manufactured and sold by the Gibson Guitar Corporation, in 1952, was named after (and endorsed by) what American guitarist and inventor?",
+        difficulty: 0,
+        date: "2024-09-19",
+        answers: ["Les Paul"],
+    },
+    {
+        question: "While most mozzarella cheese produced globally is made from cow's milk, a higher end variety, originating in Italy (where it is given special protected geographic status) is made from the milk of what animal?",
+        difficulty: 1,
+        date: "2024-09-19",
+        answers: ["Water Buffalo", "Buffalo"],
+    },
+    {
+        question: "'Jumpman' was an early name for the video game character now known as Mario, and is also unrelatedly the name of a logo owned by what company?",
+        difficulty: 2,
+        date: "2024-09-19",
+        answers: ["Nike"],
+    },
 ];
 
 export default questions;
