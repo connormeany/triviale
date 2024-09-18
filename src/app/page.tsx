@@ -144,9 +144,10 @@ export default function TrivialeGame() {
     if (gameState.showAnswer) return
 
     const currentQuestion = filteredQuestions[gameState.currentQuestion]
-    const isCorrect = currentQuestion.answers.some(answer => answer.toLowerCase() === currentGuess.toLowerCase())
+    const trimmedGuess = currentGuess.trim();
+    const isCorrect = currentQuestion.answers.some(answer => answer.toLowerCase() === trimmedGuess.toLowerCase())
     const newAnswers = [...gameState.answers]
-    newAnswers[gameState.currentQuestion] = currentGuess
+    newAnswers[gameState.currentQuestion] = trimmedGuess
     const newIsCorrect = [...gameState.isCorrect]
     newIsCorrect[gameState.currentQuestion] = isCorrect
 
