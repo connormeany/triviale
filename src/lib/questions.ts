@@ -115,22 +115,22 @@ const questions: Question[] = [
         answers: ["Lehman Brothers", "Lehman", "The Lehman Brothers", "Lehman Brother"],
     },
     {
-        question: "The first solid body electric guitar manufactured and sold by the Gibson Guitar Corporation, in 1952, was named after (and endorsed by) what American guitarist and inventor?",
+        question: "What is the largest ocean in the world?",
         difficulty: 0,
         date: "2024-09-19",
-        answers: ["Les Paul"],
+        answers: ["Pacific", "The Pacific", "Pacific Ocean", "The Pacific Ocean"],
     },
     {
-        question: "While most mozzarella cheese produced globally is made from cow's milk, a higher end variety, originating in Italy (where it is given special protected geographic status) is made from the milk of what animal?",
+        question: "A parabola is defined as a set of points on a plane equidistant from a given line and a given fixed point. The line is called the directrix; what is the term most commonly used for the fixed point?",
         difficulty: 1,
         date: "2024-09-19",
-        answers: ["Water Buffalo", "Buffalo"],
+        answers: ["Focus", "the focus", "foci", "the foci", "focuses"],
     },
     {
-        question: "'Jumpman' was an early name for the video game character now known as Mario, and is also unrelatedly the name of a logo owned by what company?",
+        question: "In the history of the Grammy awards, three songs have won Record of the Year or Song of the Year whose titles reference an American city (New Orleans, San Francisco, Philadelphia). What is the only song to do so whose title references a Brazilian neighborhood?",
         difficulty: 2,
         date: "2024-09-19",
-        answers: ["Nike"],
+        answers: ["The Girl From Ipanema", "Ipanema"],
     },
 ];
 
