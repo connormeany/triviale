@@ -132,6 +132,42 @@ const questions: Question[] = [
         date: "2024-09-19",
         answers: ["The Girl From Ipanema", "Ipanema"],
     },
+    {
+        question: "What sport is known as 'America's pastime'?",
+        difficulty: 0,
+        date: "2024-09-20",
+        answers: ["Baseball"],
+    },
+    {
+        question: "Australian food technologist Cyril P. Callister is widely credited as the inventor of what food, developed after imports of a similar (and similarly named) British item were interrupted following WWI?",
+        difficulty: 1,
+        date: "2024-09-20",
+        answers: ["Vegemite"],
+    },
+    {
+        question: "72% of the liquid natural gas (LNG) imported into the U.S. comes from what Caribbean twin-island nation which, due largely to its petrochemical and industrial economy, is, by per capita GDP, the third-richest country in the Americas after the U.S. and Canada?",
+        difficulty: 2,
+        date: "2024-09-20",
+        answers: ["Trinidad and Tobago", "Trinidad", "Tobago", "Trinidad & Tobago"],
+    },
+    {
+        question: "What is the largest ocean in the world?",
+        difficulty: 0,
+        date: "2024-09-21",
+        answers: ["Pacific", "The Pacific", "Pacific Ocean", "The Pacific Ocean"],
+    },
+    {
+        question: "A parabola is defined as a set of points on a plane equidistant from a given line and a given fixed point. The line is called the directrix; what is the term most commonly used for the fixed point?",
+        difficulty: 1,
+        date: "2024-09-21",
+        answers: ["Focus", "the focus", "foci", "the foci", "focuses"],
+    },
+    {
+        question: "In the history of the Grammy awards, three songs have won Record of the Year or Song of the Year whose titles reference an American city (New Orleans, San Francisco, Philadelphia). What is the only song to do so whose title references a Brazilian neighborhood?",
+        difficulty: 2,
+        date: "2024-09-21",
+        answers: ["The Girl From Ipanema", "Ipanema"],
+    },
 ];
 
 export default questions;
