@@ -151,22 +151,40 @@ const questions: Question[] = [
         answers: ["Trinidad and Tobago", "Trinidad", "Tobago", "Trinidad & Tobago"],
     },
     {
-        question: "What is the largest ocean in the world?",
+        question: "What is the largest desert in the world?",
         difficulty: 0,
         date: "2024-09-21",
-        answers: ["Pacific", "The Pacific", "Pacific Ocean", "The Pacific Ocean"],
+        answers: ["Antarctica"],
     },
     {
-        question: "A parabola is defined as a set of points on a plane equidistant from a given line and a given fixed point. The line is called the directrix; what is the term most commonly used for the fixed point?",
-        difficulty: 1,
-        date: "2024-09-21",
-        answers: ["Focus", "the focus", "foci", "the foci", "focuses"],
-    },
-    {
-        question: "In the history of the Grammy awards, three songs have won Record of the Year or Song of the Year whose titles reference an American city (New Orleans, San Francisco, Philadelphia). What is the only song to do so whose title references a Brazilian neighborhood?",
+        question: "Mars's reddish appearance (hence the 'Red Planet') is due to the prevalence on the planet's surface of what oxide?",
         difficulty: 2,
         date: "2024-09-21",
-        answers: ["The Girl From Ipanema", "Ipanema"],
+        answers: ["Iron Oxide", "Iron"],
+    },
+    {
+        question: "In February 2024, what tech giant reported an annual revenue increase of 265%, thanks to booming sales of its generative-AI chips for servers, which sent its stock soaring toward a market capitalization of nearly $2 trillion?",
+        difficulty: 1,
+        date: "2024-09-21",
+        answers: ["NVIDIA", "NVDA"],
+    },
+    {
+        question: "What is the capital of California?",
+        difficulty: 0,
+        date: "2024-09-22",
+        answers: ["Sacramento"],
+    },
+    {
+        question: "The first woman to successfully claim the crown of England, doing so in 1553, was commonly known—especially by Protestants—by what sanguineous sobriquet?",
+        difficulty: 1,
+        date: "2024-09-22",
+        answers: ["Bloody Mary"],
+    },
+    {
+        question: "The English Premier League, Spanish Primera División (La Liga), the French Ligue 1, Italian Serie A, and Dutch Eredivisie: What is the German entity that corresponds to the items in this list?",
+        difficulty: 2,
+        date: "2024-09-22",
+        answers: ["Bundesliga", "The Bundesliga"],
     },
 ];
 
